@@ -66,17 +66,16 @@ To get started, follow these steps:
 
 ## Example Usage
 
-1.
-   Clone the repository:
+
 ```bash
 git clone https://github.com/your-repo/renue-devops-task.git
-cd renue-devops-task
+cd testrenue
 On the host server:
-2.
+
 chmod +x install.sh
 ./install.sh
 On the hosta and hostb servers:
-3.
+
 # Copy the setup.sh script to each server
 scp setup.sh root@hosta:/tmp/
 scp setup.sh root@hostb:/tmp/
