@@ -68,7 +68,7 @@ To get started, follow these steps:
 
 
 ```bash
-git clone https://github.com/your-repo/renue-devops-task.git
+git clone https://github.com/invorkel322/testrenue.git
 cd testrenue
 On the host server:
 
