@@ -1,88 +1,86 @@
-# Тестовое задание Renue
+# Renue Test Assignment
 
-## Краткая информация
-Для запуска необходимо выполнить следующие шаги:
+## Overview
+To get started, follow these steps:
 
-1. Запустить Bash скрипт `install.sh` на сервере **host**.
-2. Запустить Bash скрипт `setup.sh` на серверах **hosta** и **hostb**.
+1. Run the Bash script `install.sh` on the **host** server.
+2. Run the Bash script `setup.sh` on the **hosta** and **hostb** servers.
 
-## Структура серверов и скриптов
+## Server and Script Structure
 
-| **Сервер** | **Скрипт**     |
+| **Server** | **Script**     |
 |------------|----------------|
 | **host**   | `install.sh`   |
 | **hosta**  | `setup.sh`     |
 | **hostb**  | `setup.sh`     |
 
-## Описание скриптов
+## Script Descriptions
 
 ### `install.sh`:
-- Устанавливает необходимые зависимости и инструменты (например, Ansible).
-- Создает публичный SSH-ключ.
-- Генерирует файлы конфигурации:
-  - `inventory.ini` — инвентарь для Ansible.
-  - `playbook.yml` — Ansible playbook для выполнения всех задач настройки.
-- Запускает Ansible playbook для настройки серверов.
+- Installs the necessary dependencies and tools (e.g., Ansible).
+- Creates a public SSH key.
+- Generates configuration files:
+  - `inventory.ini` — Ansible inventory.
+  - `playbook.yml` — Ansible playbook for performing all configuration tasks.
+- Runs the Ansible playbook to configure the servers.
 
 ### `setup.sh`:
-- Позволяет ввести публичный SSH-ключ для пользователя **DevOps**.
-- Отключает SSH-авторизацию по паролю.
-- Настроит авторизацию по SSH-ключам для пользователя **DevOps**.
-- Выполнит дополнительные настройки безопасности и сервисов на серверах **hosta** и **hostb**.
+- Prompts to enter the public SSH key for the **DevOps** user.
+- Disables SSH password authentication.
+- Configures SSH key-based authentication for the **DevOps** user.
+- Performs additional security and service configurations on the **hosta** and **hostb** servers.
 
-## Задачи, решаемые проектом:
+## Tasks Addressed by the Project:
 
-1. **Отключение SSH-авторизации по паролю**:
-   - На обоих серверах отключена авторизация через пароль.
-   - Настроена только авторизация по SSH-ключу для пользователя **DevOps**.
+1. **Disabling SSH password authentication**:
+   - Password-based SSH authentication is disabled on both servers.
+   - Only SSH key-based authentication is enabled for the **DevOps** user.
 
-2. **Добавление пользователя DevOps и настройка прав**:
-   - Создан пользователь **DevOps** на обоих серверах.
-   - Для этого пользователя настроена авторизация по SSH-ключу.
-   - У пользователя **DevOps** есть права sudo без пароля.
+2. **Adding the DevOps user and configuring permissions**:
+   - A **DevOps** user is created on both servers.
+   - SSH key-based authentication is configured for the **DevOps** user.
+   - The **DevOps** user has passwordless sudo privileges.
 
-3. **Настройка Fail2Ban**:
-   - На сервере **hosta** настроен Fail2Ban для блокировки на 1 час при 3 неудачных попытках входа за 1 минуту.
+3. **Configuring Fail2Ban**:
+   - Fail2Ban is configured on **hosta** to block access for 1 hour if there are 3 failed login attempts within 1 minute.
 
-4. **Настройка PostgreSQL на сервере hosta**:
-   - Установлен PostgreSQL.
-   - Созданы базы данных `app` и `custom`.
-   - Добавлены пользователи:
-     - **app** — полный доступ к базе данных `app`.
-     - **custom** — полный доступ к базе данных `custom`.
-     - **service** — доступ на чтение ко всем базам данных.
+4. **Configuring PostgreSQL on **hosta**:
+   - PostgreSQL is installed on **hosta**.
+   - Databases `app` and `custom` are created.
+   - Users are added:
+     - **app** — full access to the `app` database.
+     - **custom** — full access to the `custom` database.
+     - **service** — read-only access to all databases.
 
-5. **Настройка Nginx на сервере hostb**:
-   - На сервере **hostb** установлен Nginx.
-   - Настроен проксинг запросов на сайт `https://renue.ru` при обращении к localhost или доменному имени сервера.
+5. **Configuring Nginx on **hostb**:
+   - Nginx is installed on **hostb**.
+   - Nginx is configured to proxy requests to the site `https://renue.ru` when accessing localhost or the server's domain name.
 
-6. **Настройка доступа PostgreSQL с сервера hostb**:
-   - На сервере **hostA** настроен доступ к PostgreSQL только с сервера **hostb**.
-   - На сервере **hostb** закрыт доступ к Nginx с сервера **hostA**.
+6. **Configuring PostgreSQL access from **hostb**:
+   - PostgreSQL on **hosta** is configured to allow access only from **hostb**.
+   - Nginx access on **hostb** is restricted from **hosta**.
 
-7. **Настройка бэкапов PostgreSQL**:
-   - На сервере **hosta** настроены ежедневные бэкапы PostgreSQL.
-   - Бэкапы сохраняются на сервере **hostb**.
+7. **Configuring PostgreSQL backups**:
+   - Daily PostgreSQL backups are configured on **hosta**.
+   - Backups are stored on **hostb**.
 
-## Пример работы
+## Example Usage
 
-1. Склонировать репозиторий:
-
+1.
+   Clone the repository:
+```bash
 git clone https://github.com/your-repo/renue-devops-task.git
-cd testrenue
-
-На сервере host:
-
+cd renue-devops-task
+On the host server:
+2.
 chmod +x install.sh
 ./install.sh
-На серверах hosta и hostb:
-
-# Копируем setup.sh на каждый сервер
-
+On the hosta and hostb servers:
+3.
+# Copy the setup.sh script to each server
 scp setup.sh root@hosta:/tmp/
 scp setup.sh root@hostb:/tmp/
 
-# Выполняем setup.sh на каждом сервере
-
+# Run setup.sh on each server
 chmod +x /tmp/setup.sh
 /tmp/setup.sh
