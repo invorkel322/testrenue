@@ -42,9 +42,9 @@
    - У пользователя **DevOps** есть права sudo без пароля.
 
 3. **Настройка Fail2Ban**:
-   - На сервере **hostA** настроен Fail2Ban для блокировки на 1 час при 3 неудачных попытках входа за 1 минуту.
+   - На сервере **hosta** настроен Fail2Ban для блокировки на 1 час при 3 неудачных попытках входа за 1 минуту.
 
-4. **Настройка PostgreSQL на сервере hostA**:
+4. **Настройка PostgreSQL на сервере hosta**:
    - Установлен PostgreSQL.
    - Созданы базы данных `app` и `custom`.
    - Добавлены пользователи:
@@ -52,26 +52,25 @@
      - **custom** — полный доступ к базе данных `custom`.
      - **service** — доступ на чтение ко всем базам данных.
 
-5. **Настройка Nginx на сервере hostB**:
-   - На сервере **hostB** установлен Nginx.
+5. **Настройка Nginx на сервере hostb**:
+   - На сервере **hostb** установлен Nginx.
    - Настроен проксинг запросов на сайт `https://renue.ru` при обращении к localhost или доменному имени сервера.
 
-6. **Настройка доступа PostgreSQL с сервера hostB**:
-   - На сервере **hostA** настроен доступ к PostgreSQL только с сервера **hostB**.
-   - На сервере **hostB** закрыт доступ к Nginx с сервера **hostA**.
+6. **Настройка доступа PostgreSQL с сервера hostb**:
+   - На сервере **hostA** настроен доступ к PostgreSQL только с сервера **hostb**.
+   - На сервере **hostb** закрыт доступ к Nginx с сервера **hostA**.
 
 7. **Настройка бэкапов PostgreSQL**:
-   - На сервере **hostA** настроены ежедневные бэкапы PostgreSQL.
-   - Бэкапы сохраняются на сервере **hostB**.
+   - На сервере **hosta** настроены ежедневные бэкапы PostgreSQL.
+   - Бэкапы сохраняются на сервере **hostb**.
 
 ## Пример работы
 
 1. Склонировать репозиторий:
-```bash
-git clone https://github.com/your-repo/renue-devops-task.git
-cd renue-devops-task
 
-``bash
+git clone https://github.com/your-repo/renue-devops-task.git
+cd testrenue
+
 На сервере host:
 
 chmod +x install.sh
@@ -79,11 +78,11 @@ chmod +x install.sh
 На серверах hosta и hostb:
 
 # Копируем setup.sh на каждый сервер
-``bash
+
 scp setup.sh root@hosta:/tmp/
 scp setup.sh root@hostb:/tmp/
 
 # Выполняем setup.sh на каждом сервере
-``bash
+
 chmod +x /tmp/setup.sh
 /tmp/setup.sh
