@@ -70,20 +70,20 @@
 ```bash
 git clone https://github.com/your-repo/renue-devops-task.git
 cd renue-devops-task
+
+``bash
 На сервере host:
 
-bash
-Копировать
 chmod +x install.sh
 ./install.sh
 На серверах hosta и hostb:
 
-bash
-Копировать
 # Копируем setup.sh на каждый сервер
+``bash
 scp setup.sh root@hosta:/tmp/
 scp setup.sh root@hostb:/tmp/
 
 # Выполняем setup.sh на каждом сервере
+``bash
 chmod +x /tmp/setup.sh
 /tmp/setup.sh
