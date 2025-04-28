@@ -25,21 +25,21 @@ To get started, follow these steps:
 - Runs the Ansible playbook to configure the servers.
 
 ### `setup.sh`:
-- Prompts to enter the public SSH key for the **DevOps** user.
+- Prompts to enter the public SSH key for the **devops** user.
 - Disables SSH password authentication.
-- Configures SSH key-based authentication for the **DevOps** user.
+- Configures SSH key-based authentication for the **devops** user.
 - Performs additional security and service configurations on the **hosta** and **hostb** servers.
 
 ## Tasks Addressed by the Project:
 
 1. **Disabling SSH password authentication**:
    - Password-based SSH authentication is disabled on both servers.
-   - Only SSH key-based authentication is enabled for the **DevOps** user.
+   - Only SSH key-based authentication is enabled for the **devops** user.
 
 2. **Adding the DevOps user and configuring permissions**:
-   - A **DevOps** user is created on both servers.
-   - SSH key-based authentication is configured for the **DevOps** user.
-   - The **DevOps** user has passwordless sudo privileges.
+   - A **devops** user is created on both servers.
+   - SSH key-based authentication is configured for the **devops** user.
+   - The **devops** user has passwordless sudo privileges.
 
 3. **Configuring Fail2Ban**:
    - Fail2Ban is configured on **hosta** to block access for 1 hour if there are 3 failed login attempts within 1 minute.
