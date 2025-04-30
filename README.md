@@ -1,5 +1,3 @@
-# Renue Test Assignment
-
 ## Overview
 To get started, follow these steps:
 
